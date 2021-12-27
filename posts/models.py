@@ -27,9 +27,7 @@ class Transaction(models.Model):
 
 class Owner(models.Model):
     name = models.CharField(max_length=64, null=True)
-    dog_set = models.ManyToManyField(Dog, blank=True, related_name="owners")
 
 
 class Customer(models.Model):
     name = models.CharField(max_length=64, null=True)
-    dog_set = models.ManyToManyField(Dog, blank=True, related_name="customers")
