@@ -50,3 +50,7 @@ uritemplate==3.0.1
 urllib3==1.26.7
 pytest-cov==3.0.0
 django-mock-queries==2.1.7
+
+celery
+django-celery
+django-celery-beat
