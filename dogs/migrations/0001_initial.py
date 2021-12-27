@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
                 ('payment_status', models.CharField(max_length=21, null=True)),
                 ('payment_intent_id', models.CharField(default=None, max_length=100, null=True)),
                 ('message', models.TextField(blank=True, null=True)),
-                ('currency', models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='posts.currency')),
+                ('currency', models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='dogs.currency')),
             ],
         ),
     ]
