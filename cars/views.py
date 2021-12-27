@@ -3,9 +3,9 @@ from .models import *
 from .serializers import *
 
 
-class DogViewSet(viewsets.ModelViewSet):
-    queryset = Dog.objects.all()
-    serializer_class = DogSerializer
+class CarViewSet(viewsets.ModelViewSet):
+    queryset = Car.objects.all()
+    serializer_class = CarSerializer
 
 
 class CustomerViewSet(viewsets.ModelViewSet):

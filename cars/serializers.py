@@ -5,9 +5,9 @@ from .models import *
 from django.core.validators import MaxLengthValidator
 
 
-class DogSerializer(serializers.ModelSerializer):
+class CarSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Dog
+        model = Car
         fields = ['id', 'name', 'code', 'symbol']
         if settings.DEBUG:
             extra_kwargs = {
