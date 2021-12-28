@@ -17,9 +17,9 @@ class Customer(models.Model):
 
 
 class Car(models.Model):
-    owners = models.ForeignKey(Owner, on_delete=models.SET_NULL, null=True)
-    customers = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    name = models.CharField(max_length=120, null=False, blank=False, unique=True)
+    owners = models.ForeignKey(Owner, on_delete=models.SET_NULL, null=True, blank=True)
+    customers = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
+    name = models.CharField(max_length=120, null=False, blank=False)
     code = models.CharField(max_length=3, null=False, blank=False, unique=True)
     symbol = models.CharField(max_length=5, null=False, blank=False, default='$')
 
