@@ -1,23 +1,5 @@
 from rest_framework import serializers
-
-from config import settings
 from .models import *
-from django.core.validators import MaxLengthValidator
-
-
-class CarSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Car
-        fields = ['id', 'name', 'code', 'symbol']
-        if settings.DEBUG:
-            extra_kwargs = {
-                'name': {
-                    'validators': [MaxLengthValidator]
-                },
-                'code': {
-                    'validators': [MaxLengthValidator]
-                }
-            }
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -26,7 +8,24 @@ class CustomerSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class CarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Car
+        fields = "__all__"
+
+
+class CarRentalSerializer(serializers.ModelSerializer):
+    car = CarSerializer()
+    customer = CustomerSerializer()
+
+    class Meta:
+        model = CarRental
+        fields = "__all__"
+
+
 class OwnerSerializer(serializers.ModelSerializer):
+    cars = CarSerializer(many=True)
+
     class Meta:
         model = Owner
         fields = "__all__"
