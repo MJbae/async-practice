@@ -2,6 +2,6 @@ from __future__ import absolute_import
 from celery import Celery
 
 app = Celery('config',
-             broker='amqp://maxwell:passwordOfmaxwell123@localhost/maxwell_vhost',
+             broker='redis://localhost:6379/1',
              backend='rpc://',
              include=['cars.tasks'])
