@@ -17,11 +17,18 @@ class Customer(models.Model):
 
 
 class Car(models.Model):
-    owners = models.ForeignKey(Owner, on_delete=models.SET_NULL, null=True, blank=True)
-    customers = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
-    name = models.CharField(max_length=120, null=False, blank=False)
     code = models.CharField(max_length=3, null=False, blank=False, unique=True)
-    symbol = models.CharField(max_length=5, null=False, blank=False, default='$')
+    owner = models.ForeignKey(Owner, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
+    name = models.CharField(max_length=120, null=False, blank=False)
 
     def __str__(self) -> str:
-        return self.name
+        return self.name + '_' + self.code
+
+
+class CarRental(models.Model):
+    code = models.CharField(max_length=3, null=False, blank=False)
+    car = models.ForeignKey(Car, on_delete=models.SET_NULL, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self) -> str:
+        return self.code
