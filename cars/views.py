@@ -18,18 +18,7 @@ class CarRentalViewSet(viewsets.ModelViewSet):
         car_id = request_body['car']
         customer_id = request_body['customer']
 
-        try:
-            car = Car.objects.get(id=car_id)
-        except Car.DoesNotExist:
-            raise exceptions.ParseError("car_id가 올바르지 않습니다.")
-
-        try:
-            customer = Customer.objects.get(id=customer_id)
-        except Customer.DoesNotExist:
-            raise exceptions.ParseError("customer_id가 올바르지 않습니다.")
-
-        car.name = update_car_name.delay(car.name, customer.name)
-        car.save()
+        update_car_name.delay(car_id, customer_id)
 
         serializer = CarRentalSerializer(data=request_body, many=many)
         if serializer.is_valid():
