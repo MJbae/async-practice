@@ -3,5 +3,4 @@ from celery import Celery
 
 app = Celery('config',
              broker='amqp://maxwell:passwordOfmaxwell123@localhost/maxwell_vhost',
-             backend='rpc://',
-             include=['tasks'])
+             backend='rpc://')

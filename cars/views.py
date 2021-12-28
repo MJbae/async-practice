@@ -3,6 +3,8 @@ from .models import *
 from rest_framework.response import Response
 from rest_framework.views import exceptions
 from .serializers import *
+from .tasks import update_car_name
+import time
 
 
 class CarRentalViewSet(viewsets.ModelViewSet):
@@ -26,9 +28,9 @@ class CarRentalViewSet(viewsets.ModelViewSet):
         except Customer.DoesNotExist:
             raise exceptions.ParseError("customer_id가 올바르지 않습니다.")
 
-        car.name = customer.name + "'s " + car.name
+        car.name = update_car_name.delay(car.name, customer.name)
         car.save()
-
+        time.sleep(10)
         serializer = CarRentalSerializer(data=request_body, many=many)
         if serializer.is_valid():
             serializer.save()

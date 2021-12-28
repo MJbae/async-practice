@@ -54,3 +54,4 @@ django-mock-queries==2.1.7
 celery
 django-celery
 django-celery-beat
+flower
