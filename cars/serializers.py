@@ -15,9 +15,6 @@ class CarSerializer(serializers.ModelSerializer):
 
 
 class CarRentalSerializer(serializers.ModelSerializer):
-    car = CarSerializer()
-    customer = CustomerSerializer()
-
     class Meta:
         model = CarRental
         fields = "__all__"
