@@ -30,7 +30,7 @@ class CarRentalViewSet(viewsets.ModelViewSet):
 
         car.name = update_car_name.delay(car.name, customer.name)
         car.save()
-        time.sleep(10)
+
         serializer = CarRentalSerializer(data=request_body, many=many)
         if serializer.is_valid():
             serializer.save()

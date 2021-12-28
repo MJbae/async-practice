@@ -1,8 +1,6 @@
-from celery import shared_task
-import time
+from config.celery import app
 
 
-@shared_task
+@app.task
 def update_car_name(car_name, customer_name):
-    time.sleep(3)
     return customer_name + "'s " + car_name
