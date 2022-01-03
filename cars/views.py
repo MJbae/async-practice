@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import exceptions
 from .serializers import *
 from .tasks import update_car_name
+from asyncio import exceptions
 import time
 
 
@@ -18,13 +19,16 @@ class CarRentalViewSet(viewsets.ModelViewSet):
         customer_id = request_body['customer']
 
         response = update_car_name.apply_async(kwargs={"car_id": car_id, "customer_id": customer_id})
-        result = response.get()
+        final_response = response.get()
 
-        if result == "success":
-            response_body = result
+        if final_response["result"] == "success":
+            response_body = final_response
             response_body["data"] = request_body
             return Response(response_body, status=status.HTTP_201_CREATED)
-        return Response(result, status=status.HTTP_400_BAD_REQUEST)
+        if final_response["result"] == "fail":
+            return Response(final_response, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            raise exceptions.InvalidStateError
 
 
 class CarViewSet(viewsets.ModelViewSet):

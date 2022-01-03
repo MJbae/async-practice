@@ -7,21 +7,18 @@ from config.celery import app
 
 @app.task
 def update_car_name(car_id, customer_id):
-    response = {"result": "success"}
     try:
         car = Car.objects.get(id=car_id)
     except Car.DoesNotExist:
-        response["result"] = "car_id가 올바르지 않습니다."
-        return json.dumps(response)
+        return {"result": "fail", "message": "car_id가 올바르지 않습니다."}
 
     try:
         customer = Customer.objects.get(id=customer_id)
     except Customer.DoesNotExist:
-        response["result"] = "customer_id가 올바르지 않습니다."
-        return json.dumps(response)
+        return {"result": "fail", "message": "customer_id가 올바르지 않습니다."}
 
     modified_name = f"{car.name}'s {customer.name}"
     car.name = modified_name
     car.save()
 
-    return json.dumps(response)
+    return {"result": "success"}
