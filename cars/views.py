@@ -18,13 +18,16 @@ class CarRentalViewSet(viewsets.ModelViewSet):
         car_id = request_body['car']
         customer_id = request_body['customer']
 
-        update_car_name.delay(car_id, customer_id)
+        response = update_car_name.apply_async([car_id, customer_id])
+        result = response.get()
+        response_body = result
 
         serializer = CarRentalSerializer(data=request_body, many=many)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            response_body["data"] = serializer.data
+            return Response(response_body, status=status.HTTP_201_CREATED)
+        return Response(response_body, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CarViewSet(viewsets.ModelViewSet):
