@@ -18,7 +18,7 @@ class CarRentalViewSet(viewsets.ModelViewSet):
         car_id = request_body['car']
         customer_id = request_body['customer']
 
-        response = update_car_name.apply_async([car_id, customer_id])
+        response = update_car_name.apply_async(kwargs={"car_id": car_id, "customer_id": customer_id})
         result = response.get()
         response_body = result
 
