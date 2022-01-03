@@ -13,7 +13,6 @@ class CarRentalViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         request_body = request.data
-        many = isinstance(request_body, list)
 
         car_id = request_body['car']
         customer_id = request_body['customer']
