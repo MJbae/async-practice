@@ -2,10 +2,12 @@ from __future__ import absolute_import
 from celery import Celery
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+from config.settings import CELERY_BROKER_URL
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+print(f'CELERY_BROKER_URL: {CELERY_BROKER_URL}')
 app = Celery('config',
-             broker='redis://localhost:6379/1',
-             backend='rpc://',
+             broker=CELERY_BROKER_URL,
+             backend=None,
              include=['cars.tasks'])
 
