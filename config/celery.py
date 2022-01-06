@@ -10,3 +10,4 @@ app = Celery('config',
              backend='django-db',
              include=['cars.tasks'])
 
+app.autodiscover_tasks()

@@ -3,9 +3,10 @@ from asyncio import exceptions
 
 from cars.models import Car, Customer
 from config.celery import app
+from celery import shared_task
 
 
-@app.task
+@shared_task
 def update_car_name(car_id, customer_id):
     try:
         car = Car.objects.get(id=car_id)
