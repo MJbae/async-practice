@@ -7,34 +7,62 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cars', '0005_auto_20211228_0046'),
+        ("cars", "0005_auto_20211228_0046"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='car',
-            name='customers',
+            model_name="car",
+            name="customers",
         ),
         migrations.RemoveField(
-            model_name='car',
-            name='owners',
+            model_name="car",
+            name="owners",
         ),
         migrations.RemoveField(
-            model_name='car',
-            name='symbol',
+            model_name="car",
+            name="symbol",
         ),
         migrations.AddField(
-            model_name='car',
-            name='owner',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='cars.owner'),
+            model_name="car",
+            name="owner",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="cars.owner",
+            ),
         ),
         migrations.CreateModel(
-            name='CarRental',
+            name="CarRental",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('code', models.CharField(max_length=3, unique=True)),
-                ('cars', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='cars.car')),
-                ('customer', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='cars.customer')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("code", models.CharField(max_length=3, unique=True)),
+                (
+                    "cars",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="cars.car",
+                    ),
+                ),
+                (
+                    "customer",
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="cars.customer",
+                    ),
+                ),
             ],
         ),
     ]

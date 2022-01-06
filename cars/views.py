@@ -15,10 +15,12 @@ class CarRentalViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         request_body = request.data
 
-        car_id = request_body['car']
-        customer_id = request_body['customer']
+        car_id = request_body["car"]
+        customer_id = request_body["customer"]
 
-        response = update_car_name.apply_async(kwargs={"car_id": car_id, "customer_id": customer_id})
+        response = update_car_name.apply_async(
+            kwargs={"car_id": car_id, "customer_id": customer_id}
+        )
         final_response = response.get()
 
         if final_response["result"] == "success":

@@ -18,11 +18,13 @@ class Customer(models.Model):
 
 class Car(models.Model):
     code = models.CharField(max_length=3, null=False, blank=False, unique=True)
-    owner = models.ForeignKey(Owner, on_delete=models.SET_NULL, null=True, blank=True, related_name='cars')
+    owner = models.ForeignKey(
+        Owner, on_delete=models.SET_NULL, null=True, blank=True, related_name="cars"
+    )
     name = models.CharField(max_length=120, null=False, blank=False)
 
     def __str__(self) -> str:
-        return self.name + '_' + self.code
+        return self.name + "_" + self.code
 
 
 class CarRental(models.Model):

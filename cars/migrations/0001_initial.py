@@ -8,44 +8,85 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Currency',
+            name="Currency",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=120, unique=True)),
-                ('code', models.CharField(max_length=3, unique=True)),
-                ('symbol', models.CharField(default='$', max_length=5)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=120, unique=True)),
+                ("code", models.CharField(max_length=3, unique=True)),
+                ("symbol", models.CharField(default="$", max_length=5)),
             ],
         ),
         migrations.CreateModel(
-            name='Customer',
+            name="Customer",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=64, null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=64, null=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Owner',
+            name="Owner",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=64, null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=64, null=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Transaction',
+            name="Transaction",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
-                ('email', models.EmailField(max_length=50)),
-                ('creation_date', models.DateTimeField(auto_now_add=True)),
-                ('payment_status', models.CharField(max_length=21, null=True)),
-                ('payment_intent_id', models.CharField(default=None, max_length=100, null=True)),
-                ('message', models.TextField(blank=True, null=True)),
-                ('currency', models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='cars.currency')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
+                ("email", models.EmailField(max_length=50)),
+                ("creation_date", models.DateTimeField(auto_now_add=True)),
+                ("payment_status", models.CharField(max_length=21, null=True)),
+                (
+                    "payment_intent_id",
+                    models.CharField(default=None, max_length=100, null=True),
+                ),
+                ("message", models.TextField(blank=True, null=True)),
+                (
+                    "currency",
+                    models.ForeignKey(
+                        default=1,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="cars.currency",
+                    ),
+                ),
             ],
         ),
     ]

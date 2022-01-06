@@ -5,8 +5,8 @@ import os
 from config.settings import CELERY_BROKER_URL
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
-app = Celery('config')
+app = Celery("config")
 
-app.config_from_object('django.conf:settings', namespace='CELERY')
+app.config_from_object("django.conf:settings", namespace="CELERY")
 
 app.autodiscover_tasks()

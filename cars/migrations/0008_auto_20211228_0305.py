@@ -7,32 +7,43 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cars', '0007_auto_20211228_0248'),
+        ("cars", "0007_auto_20211228_0248"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='car',
-            name='car_rental',
+            model_name="car",
+            name="car_rental",
         ),
         migrations.AddField(
-            model_name='carrental',
-            name='car',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='cars.car'),
+            model_name="carrental",
+            name="car",
+            field=models.ForeignKey(
+                null=True, on_delete=django.db.models.deletion.SET_NULL, to="cars.car"
+            ),
         ),
         migrations.AlterField(
-            model_name='car',
-            name='owner',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='cars.owner'),
+            model_name="car",
+            name="owner",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="cars.owner",
+            ),
         ),
         migrations.AlterField(
-            model_name='carrental',
-            name='code',
+            model_name="carrental",
+            name="code",
             field=models.CharField(max_length=3),
         ),
         migrations.AlterField(
-            model_name='carrental',
-            name='customer',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.SET_NULL, to='cars.customer'),
+            model_name="carrental",
+            name="customer",
+            field=models.OneToOneField(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="cars.customer",
+            ),
         ),
     ]

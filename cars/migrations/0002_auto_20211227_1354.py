@@ -6,27 +6,35 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cars', '0001_initial'),
+        ("cars", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Car',
+            name="Car",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=120, unique=True)),
-                ('code', models.CharField(max_length=3, unique=True)),
-                ('symbol', models.CharField(default='$', max_length=5)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=120, unique=True)),
+                ("code", models.CharField(max_length=3, unique=True)),
+                ("symbol", models.CharField(default="$", max_length=5)),
             ],
         ),
         migrations.RemoveField(
-            model_name='transaction',
-            name='currency',
+            model_name="transaction",
+            name="currency",
         ),
         migrations.DeleteModel(
-            name='Currency',
+            name="Currency",
         ),
         migrations.DeleteModel(
-            name='Transaction',
+            name="Transaction",
         ),
     ]
