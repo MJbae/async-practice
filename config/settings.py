@@ -123,14 +123,14 @@ AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
 # Celery Setting
-CELERY_accept_content = ['application/json']
-CELERY_task_serializer = 'json'
-CELERY_TASK_DEFAULT_QUEUE = 'myqueue'
 CELERY_BROKER_URL = f"sqs://{AWS_ACCESS_KEY_ID}:{AWS_SECRET_ACCESS_KEY}@"
 CELERY_BROKER_TRANSPORT_OPTIONS = {
     "region": "ap-northeast-2",
-    'queue_name_prefix': 'django-',
-    'visibility_timeout': 7200,
+    'visibility_timeout': 1800,
     'polling_interval': 1
 }
-CELERY_result_backend = None
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_CONTENT_ENCODING = 'utf-8'
+CELERY_RESULT_BACKEND = 'django-db'
