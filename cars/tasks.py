@@ -2,7 +2,7 @@ import json
 from asyncio import exceptions
 from django.db import transaction, IntegrityError
 from cars.models import Car, Customer
-
+from config.celery import app
 from celery import shared_task
 
 
@@ -30,7 +30,6 @@ def destroy_cars():
     first_id = Car.objects.earliest("id").__dict__["id"]
     last_id = Car.objects.latest("id").__dict__["id"]
     id_list = [car_id for car_id in range(first_id, last_id + 1)]
-
     try:
         _delete_all_in_bulk(id_list)
     except exceptions.InvalidStateError:
