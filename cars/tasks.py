@@ -1,7 +1,7 @@
 import json
 from asyncio import exceptions
 from django.db import transaction, IntegrityError
-from cars.models import Car, Customer
+from cars.models import Car, Customer, CarRental
 from config.celery import app
 from celery import shared_task
 
@@ -21,6 +21,9 @@ def update_car_name(car_id, customer_id):
     modified_name = f"{car.name}'s {customer.name}"
     car.name = modified_name
     car.save()
+
+    rental = CarRental(code=str(car_id+customer_id), car=car, customer=customer)
+    rental.save()
 
     return {"result": "success"}
 
