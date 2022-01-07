@@ -12,9 +12,9 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    'destroy-all-cars': {
-        'task': 'cars.tasks.destroy_cars',
-        'schedule': crontab(),
-        'args': (),
+    "destroy-all-cars": {
+        "task": "cars.tasks.destroy_cars",
+        "schedule": crontab(),
+        "args": (),
     },
 }
