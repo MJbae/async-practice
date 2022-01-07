@@ -22,7 +22,7 @@ def update_car_name(car_id, customer_id):
     car.name = modified_name
     car.save()
 
-    rental = CarRental(code=str(car_id+customer_id), car=car, customer=customer)
+    rental = CarRental(code=str(car_id + customer_id), car=car, customer=customer)
     rental.save()
 
     return {"result": "success"}
@@ -41,6 +41,7 @@ def destroy_cars():
     return {"result": "success"}
 
 
+@transaction.atomic
 def _delete_all_in_bulk(id_list):
     try:
         with transaction.atomic():
