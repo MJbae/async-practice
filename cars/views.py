@@ -3,7 +3,7 @@ from .models import *
 from rest_framework.response import Response
 from rest_framework.views import exceptions
 from .serializers import *
-from .tasks import update_car_name
+from .tasks import update_car_name, destroy_cars
 from asyncio import exceptions
 import time
 
@@ -36,6 +36,13 @@ class CarRentalViewSet(viewsets.ModelViewSet):
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        result = destroy_cars.apply_async()
+
+        if result.get("result") == "fail":
+            return Response(result, status=status.HTTP_400_BAD_REQUEST)
+        return Response(result, status=status.HTTP_204_NO_CONTENT)
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
